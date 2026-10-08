@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Entrada - Farmacia Municipal</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        
+        <!-- MENÚ LATERAL -->
+        <aside class="sidebar" id="sidebar-container"></aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="main-content">
+            <header class="page-header-simple">
+                <h1 class="header-with-icon">
+                    <svg class="icon-header" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1C8F4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 16h6"/>
+                        <path d="M19 13v6"/>
+                        <path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14"/>
+                        <path d="m7.5 4.27 9 5.15"/>
+                        <polyline points="3.29 7 12 12 20.71 7"/>
+                        <line x1="12" y1="22" x2="12" y2="12"/>
+                    </svg>
+                    Registro de entrada
+                </h1>
+                <p class="subtitle">Registra el ingreso de medicamentos al inventario</p>
+            </header>
+
+            <div class="form-card">
+                <form id="formEntrada">
+                    
+                    <!-- Medicamento (buscador con flechita) -->
+                    <div class="form-group">
+                        <label class="required">Medicamento</label>
+                        <div class="input-dropdown">
+                            <input type="text" id="medicamento" placeholder="Escriba para buscar o use la flechita..." required autocomplete="off">
+                            <button type="button" class="dropdown-arrow" id="btnDesplegar" title="Ver todos">
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <div class="dropdown-list" id="listaMedicamentos"></div>
+                        </div>
+                    </div>
+
+                    <!-- Lote + Cantidad -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="required">Número de lote</label>
+                            <input type="text" id="lote" placeholder="Ej: LOT-2024-001" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Cantidad</label>
+                            <input type="number" id="cantidad" value="0" min="1" required>
+                        </div>
+                    </div>
+
+                    <!-- Fecha fabricación + Fecha vencimiento -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Fecha de fabricación</label>
+                            <input type="date" id="fechaFabricacion">
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Fecha de vencimiento</label>
+                            <input type="date" id="fechaVencimiento" required>
+                        </div>
+                    </div>
+
+                    <!-- Proveedor -->
+                    <div class="form-group">
+                        <label>Proveedor</label>
+                        <input type="text" id="proveedor" placeholder="Ej: Distribuidora Farmacéutica S.A.">
+                    </div>
+
+                    <!-- Observaciones -->
+                    <div class="form-group">
+                        <label>Observaciones</label>
+                        <textarea id="observaciones" rows="4" placeholder="Notas adicionales..."></textarea>
+                    </div>
+
+                    <!-- Botón -->
+                    <button type="submit" class="btn-success">
+                        <i class="fa-solid fa-floppy-disk"></i> Registrar entrada
+                    </button>
+
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- NOTIFICACIÓN DE ÉXITO (TOAST) -->
+    <div class="toast" id="toast">
+        <div class="toast-title">Entrada registrada</div>
+        <div class="toast-message" id="toastMessage">X unidades de Medicamento</div>
+    </div>
+
+    <script src="js/layout.js"></script>
+    <script src="js/entradas.js"></script>
+</body>
+</html>

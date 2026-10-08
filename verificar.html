@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificar Correo - Farmacia Municipal</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="login-body">
+
+    <div class="login-left">
+        <img src="img/escudo.png" alt="Escudo Municipal">
+        <h1>Municipalidad de<br>San Juan Sacatepéquez</h1>
+        <h2>Farmacia Municipal</h2>
+        <p>Sistema de Control de Inventario</p>
+    </div>
+
+    <div class="login-right">
+        <div class="login-card">
+            
+            <div style="text-align: center; margin-bottom: 20px;">
+                <div style="display: inline-flex; align-items: center; justify-content: center; width: 55px; height: 55px; background: #eef2ff; border-radius: 12px;">
+                    <i class="fa-regular fa-envelope" style="font-size: 24px; color: var(--accent-blue);"></i>
+                </div>
+            </div>
+            
+            <h2>Verificar correo</h2>
+            <p class="verify-subtitle">Enviamos un código a <strong id="emailMostrado">correo@ejemplo.com</strong></p>
+
+            <form id="verifyForm">
+                <div class="code-inputs">
+                    <input type="text" maxlength="1" class="code-input" inputmode="numeric">
+                    <input type="text" maxlength="1" class="code-input" inputmode="numeric">
+                    <input type="text" maxlength="1" class="code-input" inputmode="numeric">
+                    <input type="text" maxlength="1" class="code-input" inputmode="numeric">
+                    <input type="text" maxlength="1" class="code-input" inputmode="numeric">
+                    <input type="text" maxlength="1" class="code-input" inputmode="numeric">
+                </div>
+
+                <button type="submit" class="btn-verify">Verificar</button>
+            </form>
+
+            <div class="resend-text">
+                ¿No recibió el código? <a href="#">Reenviar</a>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Mostrar el correo guardado (o uno por defecto)
+        const emailGuardado = localStorage.getItem('tempEmail') || 'emily.lopez@miumg.edu.gt';
+        document.getElementById('emailMostrado').textContent = emailGuardado;
+
+        // Auto-focus en los inputs
+        const inputs = document.querySelectorAll('.code-input');
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                if (e.target.value.length === 1 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && e.target.value === '' && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+        });
+
+        // PROTOTIPO: Cualquier código redirige al dashboard
+        document.getElementById('verifyForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            localStorage.setItem('usuarioLogueado', emailGuardado);
+            window.location.href = 'dashboard.html';
+        });
+    </script>
+</body>
+</html>

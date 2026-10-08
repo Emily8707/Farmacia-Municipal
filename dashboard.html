@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Principal - Farmacia Municipal</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        
+        <!-- MENÚ LATERAL -->
+        <aside class="sidebar" id="sidebar-container"></aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="main-content">
+            <header class="page-header-dashboard">
+                <h1>Panel principal</h1>
+                <p class="subtitle">Resumen general del inventario farmacéutico</p>
+            </header>
+
+            <!-- TARJETAS DE RESUMEN (interactivas) -->
+            <div class="cards-grid">
+                
+                <!-- Total de medicamentos → medicamentos.html -->
+                <a href="medicamentos.html" class="card card-link">
+                    <div class="card-info">
+                        <p>Total de<br>medicamentos</p>
+                        <h2>104</h2>
+                    </div>
+                    <div class="card-icon blue">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/>
+                            <path d="m8.5 8.5 7 7"/>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Entradas del día → entradas.html -->
+                <a href="entradas.html" class="card card-link">
+                    <div class="card-info">
+                        <p>Entradas del día</p>
+                        <h2>0</h2>
+                    </div>
+                    <div class="card-icon green">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 16h6"/>
+                            <path d="M19 13v6"/>
+                            <path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14"/>
+                            <path d="m7.5 4.27 9 5.15"/>
+                            <polyline points="3.29 7 12 12 20.71 7"/>
+                            <line x1="12" y1="22" x2="12" y2="12"/>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Salidas del día → salidas.html -->
+                <a href="salidas.html" class="card card-link">
+                    <div class="card-info">
+                        <p>Salidas del día</p>
+                        <h2>0</h2>
+                    </div>
+                    <div class="card-icon orange">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 16h6"/>
+                            <path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14"/>
+                            <path d="m7.5 4.27 9 5.15"/>
+                            <polyline points="3.29 7 12 12 20.71 7"/>
+                            <line x1="12" y1="22" x2="12" y2="12"/>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Alertas activas → alertas.html -->
+                <a href="alertas.html" class="card card-link">
+                    <div class="card-info">
+                        <p>Alertas activas</p>
+                        <h2>10</h2>
+                    </div>
+                    <div class="card-icon red">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                    </div>
+                </a>
+
+            </div>
+
+            <!-- TABLA DE VENCIMIENTOS -->
+            <div class="table-container">
+                <div class="table-header">
+                    <h3><i class="fa-regular fa-clock"></i> Medicamentos próximos a vencer</h3>
+                    <a href="alertas.html">Ver todas <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Medicamento</th>
+                            <th>Lote</th>
+                            <th>Vencimiento</th>
+                            <th>Cantidad</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Naproxeno</td>
+                            <td>L0071-TAB</td>
+                            <td>10/10/2026</td>
+                            <td>363</td>
+                            <td><span class="badge red">3 días</span></td>
+                        </tr>
+                        <tr>
+                            <td>Montelukast</td>
+                            <td>L0531-TAB</td>
+                            <td>15/10/2026</td>
+                            <td>644</td>
+                            <td><span class="badge red">8 días</span></td>
+                        </tr>
+                        <tr>
+                            <td>Carvedilol</td>
+                            <td>L0331-TAB</td>
+                            <td>22/10/2026</td>
+                            <td>288</td>
+                            <td><span class="badge red">15 días</span></td>
+                        </tr>
+                        <tr>
+                            <td>Ramipril</td>
+                            <td>L0291-TAB</td>
+                            <td>29/10/2026</td>
+                            <td>644</td>
+                            <td><span class="badge red">22 días</span></td>
+                        </tr>
+                        <tr>
+                            <td>Claritromicina</td>
+                            <td>L0161-TAB</td>
+                            <td>06/11/2026</td>
+                            <td>705</td>
+                            <td><span class="badge yellow">30 días</span></td>
+                        </tr>
+                        <tr>
+                            <td>Morfina</td>
+                            <td>L0041-TAB</td>
+                            <td>13/11/2026</td>
+                            <td>799</td>
+                            <td><span class="badge yellow">37 días</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/layout.js"></script>
+</body>
+</html>

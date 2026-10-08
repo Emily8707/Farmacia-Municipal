@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Existencias - Farmacia Municipal</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar-container"></aside>
+        <main class="main-content">
+            <header class="page-header-simple">
+                <h1>Consulta de existencias</h1>
+                <p class="subtitle">Busca medicamentos y revisa el detalle de lotes</p>
+            </header>
+            <div class="existencias-layout">
+                <div class="panel-lista">
+                    <div class="search-bar-panel">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="buscador" placeholder="Buscar medicamento...">
+                    </div>
+                    <div class="lista-medicamentos" id="listaMedicamentos"></div>
+                </div>
+                <div class="panel-detalle" id="panelDetalle">
+                    <div class="empty-state" id="emptyState">
+                        <i class="fa-solid fa-hand-pointer"></i>
+                        <p>Selecciona un medicamento para ver el detalle de sus lotes</p>
+                    </div>
+                    <div class="detalle-content" id="detalleContent" style="display: none;">
+                        <div class="detalle-header">
+                            <img id="detalleImg" src="" alt="">
+                            <div>
+                                <h2 id="detalleNombre"></h2>
+                                <p class="detalle-categoria" id="detalleCategoria"></p>
+                            </div>
+                        </div>
+                        <div class="detalle-info-row">
+                            <span><strong>Presentación:</strong> <span id="detallePresentacion"></span></span>
+                            <span><strong>Concentración:</strong> <span id="detalleConcentracion"></span></span>
+                            <span><strong>Stock total:</strong> <span id="detalleStockTotal"></span> un.</span>
+                            <span><strong>Estado:</strong> <span id="detalleEstado" class="badge-status"></span></span>
+                        </div>
+                        <div class="lotes-section">
+                            <h3>Lotes disponibles</h3>
+                            <table class="lotes-table">
+                                <thead>
+                                    <tr>
+                                        <th>Lote</th>
+                                        <th>Vencimiento</th>
+                                        <th>Días restantes</th>
+                                        <th>Cantidad</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaLotes"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="js/layout.js"></script>
+    <script src="js/existencias.js"></script>
+</body>
+</html>

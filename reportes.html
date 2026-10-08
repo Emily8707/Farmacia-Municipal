@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generación de Reportes - Farmacia Municipal</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar-container"></aside>
+        <main class="main-content">
+            <header class="page-header-simple">
+                <h1 class="header-with-icon">
+                    <svg class="icon-header" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3498db" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="8" y1="13" x2="16" y2="13"/>
+                        <line x1="8" y1="17" x2="16" y2="17"/>
+                        <line x1="8" y1="9" x2="10" y2="9"/>
+                    </svg>
+                    Generación de reportes
+                </h1>
+                <p class="subtitle">Genera reportes de existencias, movimientos y vencimientos</p>
+            </header>
+            <div class="report-card">
+                <form id="reportForm">
+                    <div class="report-row">
+                        <div class="form-control-full">
+                            <label class="required">Tipo de reporte</label>
+                            <select id="tipoReporte" required>
+                                <option value="existencias">Existencias</option>
+                                <option value="movimientos">Movimientos</option>
+                                <option value="vencimientos">Vencimientos</option>
+                                <option value="entradas">Entradas</option>
+                                <option value="salidas">Salidas</option>
+                                <option value="stock_bajo">Stock Bajo</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="report-row">
+                        <div class="form-control-half">
+                            <label>Fecha desde</label>
+                            <input type="date" id="fechaDesde">
+                        </div>
+                        <div class="form-control-half">
+                            <label>Fecha hasta</label>
+                            <input type="date" id="fechaHasta">
+                        </div>
+                    </div>
+                    <div class="report-row">
+                        <div class="form-control-full">
+                            <label class="required">Formato</label>
+                            <div class="format-options">
+                                <label class="format-option">
+                                    <input type="radio" name="formato" value="pdf" checked>
+                                    <div class="format-option-content">
+                                        <div class="format-radio-circle"></div>
+                                        <i class="fa-solid fa-file-pdf"></i>
+                                        <span>PDF (CSV<br>descargable)</span>
+                                    </div>
+                                </label>
+                                <label class="format-option">
+                                    <input type="radio" name="formato" value="excel">
+                                    <div class="format-option-content">
+                                        <div class="format-radio-circle"></div>
+                                        <i class="fa-solid fa-file-excel"></i>
+                                        <span>Excel (CSV<br>descargable)</span>
+                                    </div>
+                                </label>
+                                <label class="format-option">
+                                    <input type="radio" name="formato" value="imprimir">
+                                    <div class="format-option-content">
+                                        <div class="format-radio-circle"></div>
+                                        <i class="fa-solid fa-print"></i>
+                                        <span>Imprimir</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-generate">
+                        <i class="fa-solid fa-download"></i> Generar reporte
+                    </button>
+                </form>
+            </div>
+        </main>
+    </div>
+    <script src="js/layout.js"></script>
+    <script src="js/reportes.js"></script>
+</body>
+</html>

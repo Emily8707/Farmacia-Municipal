@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicamentos - Farmacia Municipal</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar-container"></aside>
+        <main class="main-content">
+            <header class="page-header">
+                <div>
+                    <h1>Gestión de medicamentos</h1>
+                    <p class="subtitle">Administra el catálogo de medicamentos</p>
+                </div>
+                <button class="btn-new" onclick="abrirModal()">
+                    <i class="fa-solid fa-plus"></i> Nuevo medicamento
+                </button>
+            </header>
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="buscador" placeholder="Buscar por nombre, presentación...">
+            </div>
+            <div class="table-container">
+                <table class="medicamentos-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Presentación</th>
+                            <th>Concentración</th>
+                            <th>Categoría</th>
+                            <th>Stock</th>
+                            <th>Precios</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaMedicamentos"></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Nuevo medicamento</h2>
+                <button class="modal-close" onclick="cerrarModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="formMedicamento" class="modal-body">
+                <div class="form-group">
+                    <label class="required">Nombre</label>
+                    <input type="text" id="nombre" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="required">Presentación</label>
+                        <select id="presentacion" required>
+                            <option value="">Seleccionar</option>
+                            <option value="Tableta">Tableta</option>
+                            <option value="Cápsula">Cápsula</option>
+                            <option value="Jarabe">Jarabe</option>
+                            <option value="Inyección">Inyección</option>
+                            <option value="Ungüento">Ungüento</option>
+                            <option value="Gotas">Gotas</option>
+                            <option value="Suspensión">Suspensión</option>
+                            <option value="Polvo">Polvo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="required">Concentración</label>
+                        <input type="text" id="concentracion" placeholder="Ej: 500mg/5ml" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Categoría</label>
+                    <select id="categoria">
+                        <option value="">Seleccionar</option>
+                        <option value="Analgésico">Analgésico</option>
+                        <option value="Antibiótico">Antibiótico</option>
+                        <option value="Antihipertensivo">Antihipertensivo</option>
+                        <option value="Antidiabético">Antidiabético</option>
+                        <option value="Antiinflamatorio">Antiinflamatorio</option>
+                        <option value="Vitamina">Vitamina</option>
+                        <option value="Gastrointestinal">Gastrointestinal</option>
+                        <option value="Respiratorio">Respiratorio</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Imagen del producto</label>
+                    <input type="text" id="imagen" placeholder="URL de la imagen (opcional)">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Stock</label>
+                        <input type="number" id="stock" value="0" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Stock mín.</label>
+                        <input type="number" id="stockMin" value="50" min="0">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Precio por unidad (Q)</label>
+                        <input type="number" id="precioUnidad" value="0" min="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Precio por caja (Q)</label>
+                        <input type="number" id="precioCaja" value="0" min="0" step="0.01">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Unidades por caja</label>
+                    <input type="number" id="unidadesCaja" value="1" min="1">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel" onclick="cerrarModal()">Cancelar</button>
+                    <button type="submit" class="btn-submit">Agregar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="js/layout.js"></script>
+    <script src="js/medicamentos.js"></script>
+</body>
+</html>
