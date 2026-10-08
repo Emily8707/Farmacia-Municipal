@@ -1,10 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const usuario = localStorage.getItem('usuarioLogueado') || 'emily.lopez@miumg.edu.gt';
+    // Obtener el correo que escribió el usuario en el login
+    // Si no hay nada, usar el correo de administrador por defecto
+    const usuario = localStorage.getItem('usuarioLogueado') || 'admin@farmacia.gob.gt';
 
     const path = window.location.pathname;
     const page = path.split("/").pop().replace('.html', '') || 'dashboard';
 
-    // Íconos SVG estilo Lucide (finos, delgados, con tapa semiabierta)
+    // Íconos SVG del sidebar (Lucide)
     const iconos = {
         dashboard: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
             <rect width="7" height="7" x="3" y="3" rx="1"/>
@@ -93,6 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     });
 
+    // Extraer nombre y correo del usuario logueado
     const inicial = usuario.charAt(0).toUpperCase();
     const nombreUsuario = usuario.split('@')[0];
 
@@ -106,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="user-email">${usuario}</p>
                 </div>
             </div>
-            <a href="login.html" class="logout-btn">
+            <a href="login.html" class="logout-btn" onclick="cerrarSesion()">
                 <i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar sesión
             </a>
         </div>
@@ -117,3 +120,10 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebarContainer.innerHTML = menuHTML;
     }
 });
+
+// ============================================================
+// CERRAR SESIÓN
+// ============================================================
+function cerrarSesion() {
+    localStorage.removeItem('usuarioLogueado');
+}

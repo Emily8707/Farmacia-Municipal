@@ -30,7 +30,7 @@
             <h2>Iniciar sesión</h2>
             <p>Ingrese sus credenciales para continuar</p>
 
-            <button type="button" class="btn-google" onclick="irAlDashboard()">
+            <button type="button" class="btn-google" onclick="loginConGoogle()">
                 <img src="https://img.icons8.com/color/18/000000/google-logo.png" alt="Google"> Continuar con Google
             </button>
             
@@ -67,12 +67,29 @@
     </div>
 
     <script>
+        // ============================================================
+        // LOGIN CON CORREO Y CONTRASEÑA
+        // ============================================================
         document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            irAlDashboard();
+            const email = document.getElementById('email').value.trim();
+            
+            if (!email) {
+                alert('Por favor ingrese su correo.');
+                return;
+            }
+            
+            // Guardar el correo real que escribió el usuario
+            localStorage.setItem('usuarioLogueado', email);
+            window.location.href = 'dashboard.html';
         });
-        function irAlDashboard() {
-            localStorage.setItem('usuarioLogueado', 'emily.lopez@miumg.edu.gt');
+
+        // ============================================================
+        // LOGIN CON GOOGLE
+        // ============================================================
+        function loginConGoogle() {
+            // Usamos un correo genérico para el modo Google
+            localStorage.setItem('usuarioLogueado', 'admin@farmacia.gob.gt');
             window.location.href = 'dashboard.html';
         }
     </script>
