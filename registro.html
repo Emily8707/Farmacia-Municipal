@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta - Farmacia Municipal</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="login-body">
+
+    <!-- Lado Izquierdo (Azul) -->
+    <div class="login-left">
+        <img src="img/escudo.png" alt="Escudo Municipal">
+        <h1>Municipalidad de<br>San Juan Sacatepéquez</h1>
+        <h2>Farmacia Municipal</h2>
+        <p>Sistema de Control de Inventario</p>
+    </div>
+
+    <!-- Lado Derecho (Formulario) -->
+    <div class="login-right">
+        <div class="login-card">
+            
+            <!-- Icono superior -->
+            <div style="text-align: center; margin-bottom: 20px;">
+                <div style="display: inline-flex; align-items: center; justify-content: center; width: 55px; height: 55px; background: #eef2ff; border-radius: 12px;">
+                    <i class="fa-solid fa-user-plus" style="font-size: 22px; color: var(--accent-blue);"></i>
+                </div>
+            </div>
+            
+            <h2>Create your account</h2>
+            <p>Sign up to get started</p>
+
+            <!-- Botón de Google -->
+            <button type="button" class="btn-google" onclick="registroConGoogle()">
+                <img src="https://img.icons8.com/color/18/000000/google-logo.png" alt="Google"> Continue with Google
+            </button>
+            
+            <div class="divider">OR</div>
+
+            <!-- Formulario -->
+            <form id="registroForm">
+                <div class="form-group">
+                    <label>Email</label>
+                    <div class="input-with-icon">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="email" id="regEmail" placeholder="you@example.com" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-with-icon">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="regPassword" placeholder="••••••••" minlength="8" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <div class="input-with-icon">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="regConfirmPassword" placeholder="••••••••" minlength="8" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-primary">Create account</button>
+            </form>
+
+            <!-- Enlace a login -->
+            <div class="create-account">
+                Already have an account? <a href="login.html">Log in</a>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // REGISTRO CON CORREO Y CONTRASEÑA
+        // ============================================================
+        document.getElementById('registroForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('regEmail').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('regConfirmPassword').value;
+
+            // Validaciones
+            if (!email) {
+                alert('Por favor ingrese su correo electrónico.');
+                return;
+            }
+            if (password.length < 8) {
+                alert('La contraseña debe tener al menos 8 caracteres.');
+                return;
+            }
+            if (password !== confirmPassword) {
+                alert('Las contraseñas no coinciden.');
+                return;
+            }
+
+            // Guardar el correo para usarlo en la verificación
+            localStorage.setItem('tempEmail', email);
+            localStorage.setItem('tempPassword', password);
+
+            // Redirigir a la pantalla de verificación
+            window.location.href = 'verificar.html';
+        });
+
+        // ============================================================
+        // REGISTRO CON GOOGLE
+        // ============================================================
+        function registroConGoogle() {
+            // Simulación - ir directamente al dashboard
+            localStorage.setItem('usuarioLogueado', 'admin@farmacia.gob.gt');
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>

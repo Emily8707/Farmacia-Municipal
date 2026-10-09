@@ -9,6 +9,7 @@
 </head>
 <body class="login-body">
 
+    <!-- Lado Izquierdo (Azul) -->
     <div class="login-left">
         <img src="img/escudo.png" alt="Escudo Municipal">
         <h1>Municipalidad de<br>San Juan Sacatepéquez</h1>
@@ -16,17 +17,19 @@
         <p>Sistema de Control de Inventario</p>
     </div>
 
+    <!-- Lado Derecho (Verificación) -->
     <div class="login-right">
         <div class="login-card">
             
+            <!-- Icono superior -->
             <div style="text-align: center; margin-bottom: 20px;">
                 <div style="display: inline-flex; align-items: center; justify-content: center; width: 55px; height: 55px; background: #eef2ff; border-radius: 12px;">
                     <i class="fa-regular fa-envelope" style="font-size: 24px; color: var(--accent-blue);"></i>
                 </div>
             </div>
             
-            <h2>Verificar correo</h2>
-            <p class="verify-subtitle">Enviamos un código a <strong id="emailMostrado">correo@ejemplo.com</strong></p>
+            <h2>Verify your email</h2>
+            <p class="verify-subtitle">We sent a code to <strong id="emailMostrado">correo@ejemplo.com</strong></p>
 
             <form id="verifyForm">
                 <div class="code-inputs">
@@ -38,41 +41,92 @@
                     <input type="text" maxlength="1" class="code-input" inputmode="numeric">
                 </div>
 
-                <button type="submit" class="btn-verify">Verificar</button>
+                <button type="submit" class="btn-verify">Verify</button>
             </form>
 
             <div class="resend-text">
-                ¿No recibió el código? <a href="#">Reenviar</a>
+                Didn't receive the code? <a href="#" id="btnResend">Resend</a>
             </div>
 
         </div>
     </div>
 
     <script>
-        // Mostrar el correo guardado (o uno por defecto)
-        const emailGuardado = localStorage.getItem('tempEmail') || 'emily.lopez@miumg.edu.gt';
+        // ============================================================
+        // MOSTRAR EL CORREO GUARDADO
+        // ============================================================
+        const emailGuardado = localStorage.getItem('tempEmail') || 'correo@ejemplo.com';
         document.getElementById('emailMostrado').textContent = emailGuardado;
 
-        // Auto-focus en los inputs
+        // ============================================================
+        // AUTO-FOCUS ENTRE LOS INPUTS DEL CÓDIGO
+        // ============================================================
         const inputs = document.querySelectorAll('.code-input');
         inputs.forEach((input, index) => {
+            // Auto-avanzar al siguiente
             input.addEventListener('input', (e) => {
                 if (e.target.value.length === 1 && index < inputs.length - 1) {
                     inputs[index + 1].focus();
                 }
             });
+
+            // Retroceder con backspace
             input.addEventListener('keydown', (e) => {
                 if (e.key === 'Backspace' && e.target.value === '' && index > 0) {
                     inputs[index - 1].focus();
                 }
             });
+
+            // Solo permitir números
+            input.addEventListener('keypress', (e) => {
+                if (!/[0-9]/.test(e.key)) {
+                    e.preventDefault();
+                }
+            });
+
+            // Permitir pegar el código completo
+            input.addEventListener('paste', (e) => {
+                e.preventDefault();
+                const pasteData = e.clipboardData.getData('text').slice(0, 6);
+                if (/^\d+$/.test(pasteData)) {
+                    pasteData.split('').forEach((char, i) => {
+                        if (inputs[i]) inputs[i].value = char;
+                    });
+                    inputs[Math.min(pasteData.length, 5)].focus();
+                }
+            });
         });
 
-        // PROTOTIPO: Cualquier código redirige al dashboard
+        // ============================================================
+        // VERIFICAR CÓDIGO (SIMULADO)
+        // ============================================================
         document.getElementById('verifyForm').addEventListener('submit', (e) => {
             e.preventDefault();
+
+            const codigo = Array.from(inputs).map(i => i.value).join('');
+
+            if (codigo.length !== 6) {
+                alert('Por favor ingrese los 6 dígitos del código.');
+                return;
+            }
+
+            // Simulación - cualquier código es válido en prototipo
             localStorage.setItem('usuarioLogueado', emailGuardado);
+            
+            // Limpiar datos temporales
+            localStorage.removeItem('tempEmail');
+            localStorage.removeItem('tempPassword');
+
+            alert('✅ Cuenta verificada exitosamente.\n\nSerá redirigido al sistema.');
             window.location.href = 'dashboard.html';
+        });
+
+        // ============================================================
+        // REENVIAR CÓDIGO
+        // ============================================================
+        document.getElementById('btnResend').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert(`📧 Se ha reenviado el código a:\n\n${emailGuardado}\n\n(Simulación - prototipo)`);
         });
     </script>
 </body>
