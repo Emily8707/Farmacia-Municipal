@@ -1,43 +1,34 @@
-const datosExistencias = [
-    { id: '001', nombre: 'Acarbosa', presentacion: 'Suspensión', concentracion: '200mg/5ml', categoria: 'Antidiabético', stock: 368 },
-    { id: '002', nombre: 'Acarbosa', presentacion: 'Inyección', concentracion: '50mg/ml', categoria: 'Antidiabético', stock: 87 },
-    { id: '003', nombre: 'Acarbosa', presentacion: 'Jarabe', concentracion: '100mg/5ml', categoria: 'Antidiabético', stock: 631 },
-    { id: '004', nombre: 'Acarbosa', presentacion: 'Cápsula', concentracion: '250mg', categoria: 'Antidiabético', stock: 861 },
-    { id: '005', nombre: 'Acarbosa', presentacion: 'Tableta', concentracion: '500mg', categoria: 'Antidiabético', stock: 296 },
-    { id: '006', nombre: 'Acetaminofén', presentacion: 'Suspensión', concentracion: '200mg/5ml', categoria: 'Analgésico', stock: 277 },
-    { id: '007', nombre: 'Acetaminofén', presentacion: 'Inyección', concentracion: '50mg/ml', categoria: 'Analgésico', stock: 256 },
-    { id: '008', nombre: 'Acetaminofén', presentacion: 'Jarabe', concentracion: '100mg/5ml', categoria: 'Analgésico', stock: 162 },
-    { id: '009', nombre: 'Acetaminofén', presentacion: 'Cápsula', concentracion: '250mg', categoria: 'Analgésico', stock: 724 },
-    { id: '010', nombre: 'Acetaminofén', presentacion: 'Tableta', concentracion: '500mg', categoria: 'Analgésico', stock: 323 }
-];
+// ============================================================
+// REPORTES (vacío - solo navegación)
+// ============================================================
+const datosExistencias = [];
+const datosMovimientos = [];
+const datosVencimientos = [];
 
-const datosMovimientos = [
-    { fecha: '2026-10-06', tipo: 'Salida', medicamento: 'Amoxicilina', lote: 'L0129-INY', cantidad: 1, persona: 'María Salmón', receta: '8989888' },
-    { fecha: '2026-10-06', tipo: 'Salida', medicamento: 'Bismuto', lote: 'L0465-SUS', cantidad: 2, persona: 'Naria Nandez', receta: '23444555' },
-    { fecha: '2026-10-06', tipo: 'Entrada', medicamento: 'Acarbosa', lote: 'L0072-TAB', cantidad: 2, persona: 'Farma 2', receta: '—' },
-    { fecha: '2026-08-25', tipo: 'Salida', medicamento: 'Calcio', lote: 'L0592-CÁP', cantidad: 1, persona: 'Juana Martínez', receta: 'REC-2026-5675' }
-];
-
-const datosVencimientos = [
-    { medicamento: 'Naproxeno', lote: 'L0071-TAB', vence: '2026-10-10', dias: 3, cantidad: 363, proveedor: 'Farmaguate' },
-    { medicamento: 'Montelukast', lote: 'L0531-TAB', vence: '2026-10-15', dias: 8, cantidad: 644, proveedor: 'BioFarma' },
-    { medicamento: 'Carvedilol', lote: 'L0331-TAB', vence: '2026-10-22', dias: 15, cantidad: 288, proveedor: 'Distribuidora Farmacéutica S.A.' }
-];
-
+// ============================================================
+// INICIALIZACIÓN
+// ============================================================
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('reportForm');
     if (!form) return;
+
     const hoy = new Date();
     const haceUnMes = new Date();
     haceUnMes.setDate(haceUnMes.getDate() - 30);
+
     document.getElementById('fechaHasta').value = hoy.toISOString().split('T')[0];
     document.getElementById('fechaDesde').value = haceUnMes.toISOString().split('T')[0];
-    form.addEventListener('submit', (e) => { e.preventDefault(); generarReporte(); });
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        generarReporte();
+    });
 });
 
 function generarReporte() {
     const tipo = document.getElementById('tipoReporte').value;
     const formato = document.querySelector('input[name="formato"]:checked').value;
+
     let datos, titulo;
     switch (tipo) {
         case 'existencias': datos = datosExistencias; titulo = 'Reporte de Existencias'; break;
@@ -47,12 +38,21 @@ function generarReporte() {
         case 'salidas': datos = datosMovimientos.filter(m => m.tipo === 'Salida'); titulo = 'Reporte de Salidas'; break;
         default: datos = datosExistencias; titulo = 'Reporte';
     }
-    if (datos.length === 0) { alert('⚠️ No hay datos para este reporte.'); return; }
+
+    // Estado vacío
+    if (datos.length === 0) {
+        alert('⚠️ No hay datos para generar el reporte.\n\nEl sistema aún no tiene medicamentos ni movimientos registrados.');
+        return;
+    }
+
     if (formato === 'pdf') generarPDF(tipo, titulo, datos);
     else if (formato === 'excel') generarCSV(tipo, titulo, datos);
     else if (formato === 'imprimir') generarImpresion(tipo, titulo, datos);
 }
 
+// ============================================================
+// GENERAR PDF
+// ============================================================
 function generarPDF(tipo, titulo, datos) {
     if (typeof window.jspdf === 'undefined') {
         const script = document.createElement('script');
@@ -81,7 +81,7 @@ function generarPDF(tipo, titulo, datos) {
     doc.text(`Total: ${datos.length} registros`, 15, 52);
 
     let y = 65;
-    datos.forEach((d, i) => {
+    datos.forEach((d) => {
         if (y > 270) { doc.addPage(); y = 20; }
         doc.setFontSize(9);
         const linea = Object.values(d).join(' | ');
@@ -92,6 +92,9 @@ function generarPDF(tipo, titulo, datos) {
     mostrarToast(`✅ PDF generado`);
 }
 
+// ============================================================
+// GENERAR CSV
+// ============================================================
 function generarCSV(tipo, titulo, datos) {
     let csv = `"${titulo}"\n"Generado: ${new Date().toLocaleString('es-GT')}"\n\n`;
     if (datos.length > 0) {
@@ -108,6 +111,9 @@ function generarCSV(tipo, titulo, datos) {
     mostrarToast(`✅ Excel/CSV generado`);
 }
 
+// ============================================================
+// GENERAR IMPRESIÓN
+// ============================================================
 function generarImpresion(tipo, titulo, datos) {
     const ventana = window.open('', '_blank');
     const encabezados = Object.keys(datos[0] || {}).map(k => `<th>${k}</th>`).join('');
@@ -118,7 +124,6 @@ function generarImpresion(tipo, titulo, datos) {
         <style>
             body { font-family: 'Segoe UI', Arial, sans-serif; padding: 30px; }
             .header { text-align: center; border-bottom: 2px solid #003399; padding-bottom: 15px; margin-bottom: 25px; }
-            .header img { width: 60px; }
             .header h1 { color: #003399; font-size: 22px; margin: 5px 0; }
             .header h2 { color: #003399; font-size: 14px; font-weight: normal; margin: 0; }
             .titulo { font-size: 18px; font-weight: bold; margin-bottom: 15px; }
@@ -126,11 +131,10 @@ function generarImpresion(tipo, titulo, datos) {
             th { background: #2e86c1; color: white; padding: 10px; text-align: left; }
             td { padding: 8px 10px; border-bottom: 1px solid #eaeaea; }
             tr:nth-child(even) { background: #f8fafc; }
-            .footer { margin-top: 30px; text-align: center; font-size: 11px; color: #999; border-top: 1px dashed #ccc; padding-top: 15px; }
+            .footer { margin-top: 30px; text-align: center; font-size: 11px; color: #999; }
         </style></head>
         <body>
             <div class="header">
-                <img src="${window.location.origin}/img/escudo.png">
                 <h1>Farmacia Municipal</h1>
                 <h2>Municipalidad de San Juan Sacatepéquez</h2>
             </div>

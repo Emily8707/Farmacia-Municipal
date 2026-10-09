@@ -9,25 +9,18 @@
 </head>
 <body>
     <div class="app-container">
-        
-        <!-- MENÚ LATERAL -->
         <aside class="sidebar" id="sidebar-container"></aside>
-
-        <!-- CONTENIDO PRINCIPAL -->
         <main class="main-content">
             <header class="page-header-dashboard">
                 <h1>Panel principal</h1>
                 <p class="subtitle">Resumen general del inventario farmacéutico</p>
             </header>
 
-            <!-- TARJETAS DE RESUMEN (interactivas) -->
             <div class="cards-grid">
-                
-                <!-- Total de medicamentos → medicamentos.html -->
                 <a href="medicamentos.html" class="card card-link">
                     <div class="card-info">
                         <p>Total de<br>medicamentos</p>
-                        <h2>104</h2>
+                        <h2>0</h2>
                     </div>
                     <div class="card-icon blue">
                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -36,8 +29,6 @@
                         </svg>
                     </div>
                 </a>
-
-                <!-- Entradas del día → entradas.html -->
                 <a href="entradas.html" class="card card-link">
                     <div class="card-info">
                         <p>Entradas del día</p>
@@ -54,8 +45,6 @@
                         </svg>
                     </div>
                 </a>
-
-                <!-- Salidas del día → salidas.html -->
                 <a href="salidas.html" class="card card-link">
                     <div class="card-info">
                         <p>Salidas del día</p>
@@ -71,12 +60,10 @@
                         </svg>
                     </div>
                 </a>
-
-                <!-- Alertas activas → alertas.html -->
                 <a href="alertas.html" class="card card-link">
                     <div class="card-info">
                         <p>Alertas activas</p>
-                        <h2>10</h2>
+                        <h2>0</h2>
                     </div>
                     <div class="card-icon red">
                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -86,74 +73,27 @@
                         </svg>
                     </div>
                 </a>
-
             </div>
 
-            <!-- TABLA DE VENCIMIENTOS -->
             <div class="table-container">
                 <div class="table-header">
                     <h3><i class="fa-regular fa-clock"></i> Medicamentos próximos a vencer</h3>
                     <a href="alertas.html">Ver todas <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Medicamento</th>
-                            <th>Lote</th>
-                            <th>Vencimiento</th>
-                            <th>Cantidad</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Naproxeno</td>
-                            <td>L0071-TAB</td>
-                            <td>10/10/2026</td>
-                            <td>363</td>
-                            <td><span class="badge red">3 días</span></td>
-                        </tr>
-                        <tr>
-                            <td>Montelukast</td>
-                            <td>L0531-TAB</td>
-                            <td>15/10/2026</td>
-                            <td>644</td>
-                            <td><span class="badge red">8 días</span></td>
-                        </tr>
-                        <tr>
-                            <td>Carvedilol</td>
-                            <td>L0331-TAB</td>
-                            <td>22/10/2026</td>
-                            <td>288</td>
-                            <td><span class="badge red">15 días</span></td>
-                        </tr>
-                        <tr>
-                            <td>Ramipril</td>
-                            <td>L0291-TAB</td>
-                            <td>29/10/2026</td>
-                            <td>644</td>
-                            <td><span class="badge red">22 días</span></td>
-                        </tr>
-                        <tr>
-                            <td>Claritromicina</td>
-                            <td>L0161-TAB</td>
-                            <td>06/11/2026</td>
-                            <td>705</td>
-                            <td><span class="badge yellow">30 días</span></td>
-                        </tr>
-                        <tr>
-                            <td>Morfina</td>
-                            <td>L0041-TAB</td>
-                            <td>13/11/2026</td>
-                            <td>799</td>
-                            <td><span class="badge yellow">37 días</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div style="text-align:center; padding:60px 20px; color:#9ca3af;">
+                    <div style="font-size:48px; margin-bottom:15px; opacity:0.4;">
+                        <i class="fa-regular fa-clock"></i>
+                    </div>
+                    <div style="font-size:16px; font-weight:600; color:#6c757d; margin-bottom:8px;">
+                        Aún no hay medicamentos próximos a vencer
+                    </div>
+                    <div style="font-size:13px;">
+                        Los medicamentos próximos a vencer aparecerán aquí.
+                    </div>
+                </div>
             </div>
         </main>
     </div>
-
     <script src="js/layout.js"></script>
 </body>
 </html>
