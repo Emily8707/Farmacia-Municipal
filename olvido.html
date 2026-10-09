@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Contraseña - Farmacia Municipal</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="login-body">
+
+    <div class="login-left">
+        <img src="img/escudo.png" alt="Escudo Municipal">
+        <h1>Municipalidad de<br>San Juan Sacatepéquez</h1>
+        <h2>Farmacia Municipal</h2>
+        <p>Sistema de Control de Inventario</p>
+    </div>
+
+    <div class="login-right">
+        <div class="login-card">
+            
+            <div style="text-align: center; margin-bottom: 20px;">
+                <div style="display: inline-flex; align-items: center; justify-content: center; width: 55px; height: 55px; background: #eef2ff; border-radius: 12px;">
+                    <i class="fa-solid fa-key" style="font-size: 24px; color: var(--accent-blue);"></i>
+                </div>
+            </div>
+            
+            <h2>Recuperar contraseña</h2>
+            <p>Ingrese su correo para recibir un enlace de recuperación</p>
+
+            <form id="olvidoForm">
+                <div class="form-group">
+                    <label>Correo electrónico</label>
+                    <div class="input-with-icon">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="email" id="email" placeholder="correo@ejemplo.com" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-primary">Enviar enlace de recuperación</button>
+            </form>
+
+            <div class="create-account">
+                ¿Recordó su contraseña? <a href="login.html">Volver al inicio de sesión</a>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('olvidoForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            
+            if (!email) {
+                alert('Por favor ingrese su correo electrónico.');
+                return;
+            }
+
+            alert(`✅ Se ha enviado un enlace de recuperación a:\n\n${email}\n\nRevise su bandeja de entrada.\n\n(Simulación - prototipo)`);
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>

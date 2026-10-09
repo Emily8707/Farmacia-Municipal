@@ -9,7 +9,6 @@
 </head>
 <body class="login-body">
 
-    <!-- Lado Izquierdo (Azul) -->
     <div class="login-left">
         <img src="img/escudo.png" alt="Escudo Municipal">
         <h1>Municipalidad de<br>San Juan Sacatepéquez</h1>
@@ -17,7 +16,6 @@
         <p>Sistema de Control de Inventario</p>
     </div>
 
-    <!-- Lado Derecho (Formulario) -->
     <div class="login-right">
         <div class="login-card">
             
@@ -48,11 +46,14 @@
                 <div class="form-group">
                     <div class="label-row">
                         <label>Contraseña</label>
-                        <a href="#">¿Olvidó su contraseña?</a>
+                        <a href="olvido.html">¿Olvidó su contraseña?</a>
                     </div>
-                    <div class="input-with-icon">
+                    <div class="input-with-icon input-password">
                         <i class="fa-solid fa-lock"></i>
                         <input type="password" id="password" placeholder="admin123" value="admin123">
+                        <button type="button" class="toggle-password" onclick="togglePassword('password', this)" title="Mostrar contraseña">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
                     </div>
                 </div>
                 
@@ -68,7 +69,27 @@
 
     <script>
         // ============================================================
-        // LOGIN CON CORREO Y CONTRASEÑA
+        // MOSTRAR/OCULTAR CONTRASEÑA
+        // ============================================================
+        function togglePassword(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const icon = btn.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+                btn.title = 'Ocultar contraseña';
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+                btn.title = 'Mostrar contraseña';
+            }
+        }
+
+        // ============================================================
+        // LOGIN
         // ============================================================
         document.getElementById('loginForm').addEventListener('submit', (e) => {
             e.preventDefault();
@@ -79,16 +100,11 @@
                 return;
             }
             
-            // Guardar el correo real que escribió el usuario
             localStorage.setItem('usuarioLogueado', email);
             window.location.href = 'dashboard.html';
         });
 
-        // ============================================================
-        // LOGIN CON GOOGLE
-        // ============================================================
         function loginConGoogle() {
-            // Usamos un correo genérico para el modo Google
             localStorage.setItem('usuarioLogueado', 'admin@farmacia.gob.gt');
             window.location.href = 'dashboard.html';
         }
